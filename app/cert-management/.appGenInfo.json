@@ -1,0 +1,28 @@
+{
+  "generationParameters": {
+    "generationDate": "Thu Jun 25 2026 18:53:43 GMT-0300 (Brasilia Standard Time)",
+    "generatorPlatform": "CLI",
+    "serviceType": "Local CAP",
+    "metadataFilename": "",
+    "serviceUrl": "http://localhost:4004/CertService/",
+    "appName": "cert-management",
+    "appTitle": "Gestão de Certificações O&G",
+    "appDescription": "Controle de habilitações técnicas e certificações obrigatórias — Petrobras",
+    "appNamespace": "",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.136.7",
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": false,
+    "generatorVersion": "1.20.3",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "FuncionariosCertificacoes"
+      }
+    ],
+    "launchText": "To launch the generated app, start your CAP project:  and navigate to the following location in your browser:\n\nhttp://localhost:4004/cert-management/webapp/index.html"
+  }
+}

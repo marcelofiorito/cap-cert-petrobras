@@ -1,0 +1,5 @@
+code,label
+VIGENTE,✅ Vigente
+VENCER_30,🟡 Vence em 30 dias
+VENCER_90,🟠 Vence em 90 dias
+VENCIDA,🔴 Vencida

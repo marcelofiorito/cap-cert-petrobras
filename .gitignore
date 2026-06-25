@@ -1,0 +1,29 @@
+# Dependências e build
+node_modules/
+gen/
+dist/
+mta_archives/
+*.mtar
+.cap-*_mta_build_tmp/
+
+# Credenciais — NUNCA versionar
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDEs
+.idea/
+.vscode/settings.json
+
+# macOS
+.DS_Store
+
+# CAP local DB
+*.db

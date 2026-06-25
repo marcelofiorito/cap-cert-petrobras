@@ -1,0 +1,12 @@
+codigo,nome,descricao,categoria,obrigatoriaPara,validadeMeses,orgaoEmissor,renovavel
+NR-10,Segurança em Instalações e Serviços em Eletricidade,Habilitação para trabalhar com instalações elétricas de baixa e alta tensão conforme NR-10 do MTE.,NR,E&P;Refinaria;Manutenção;Facilities,24,Ministério do Trabalho / Entidade acreditada,true
+NR-13,Caldeiras Vasos de Pressão e Tubulações,Qualificação técnica para operação e manutenção de caldeiras e vasos de pressão conforme NR-13.,NR,Refinaria;Operações;Engenharia,24,Ministério do Trabalho / Entidade acreditada,true
+NR-33,Segurança e Saúde em Espaços Confinados,Habilitação para entrada e trabalho em espaços confinados conforme NR-33.,NR,E&P;Refinaria;SMS;Manutenção,12,Ministério do Trabalho / Entidade acreditada,true
+NR-35,Trabalho em Altura,Qualificação para execução de atividades em altura igual ou superior a 2 metros conforme NR-35.,NR,E&P;Engenharia;Manutenção;Facilities,12,Ministério do Trabalho / Entidade acreditada,true
+NEBOSH-IGC,NEBOSH International General Certificate in Occupational Health and Safety,Certificação internacional em saúde e segurança ocupacional reconhecida globalmente.,INTERNACIONAL,SMS;HSSE;Gestão de Riscos,36,NEBOSH (National Examination Board in Occupational Safety and Health),true
+OPITO-BOSIET,OPITO Basic Offshore Safety Induction and Emergency Training,Treinamento básico de sobrevivência e emergência para trabalho offshore.,INTERNACIONAL,E&P Offshore;Plataformas,48,OPITO Approved Centre,true
+HUET,Helicopter Underwater Escape Training,Treinamento de escape subaquático de helicóptero para acesso a plataformas offshore.,INTERNACIONAL,E&P Offshore;Plataformas;Logística,48,OPITO / ABNT Approved Centre,true
+STCW-BST,STCW Basic Safety Training,Treinamento básico de segurança marítima (STCW) para operações em embarcações.,INTERNACIONAL,Logística Naval;Suporte Marítimo,60,NORMAM / Marinha do Brasil,true
+CIPA-LIDER,Liderança de CIPA,Formação de membro e líder de Comissão Interna de Prevenção de Acidentes (CIPA).,INTERNO,Todos os departamentos,12,SESMT / RH,true
+BRIGADA-INCENDIO,Brigada de Incêndio,Treinamento de formação de brigadista para combate a incêndio e primeiros socorros.,INTERNO,SMS;Facilities;Operações,12,CBMERJ / Entidade credenciada,true
+PRTP,Plano de Resposta a Emergências Petrobras,Treinamento específico Petrobras para resposta a emergências operacionais.,INTERNO,Operações;E&P;Refinaria,12,Petrobras / CENPES,true

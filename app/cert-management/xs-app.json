@@ -1,0 +1,17 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/CertService/(.*)$",
+      "target": "/CertService/$1",
+      "destination": "cert-srv-api",
+      "csrfProtection": true
+    },
+    {
+      "source": "^(.*)$",
+      "service": "html5-apps-repo-rt",
+      "target": "$1"
+    }
+  ]
+}

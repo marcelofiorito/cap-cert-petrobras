@@ -1,0 +1,125 @@
+ID: cap-cert-petrobras
+_schema-version: '3.1'
+version: 1.0.0
+description: Extensão CAP — Gestão de Certificações O&G
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+
+modules:
+
+  - name: cap-cert-petrobras-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+    build-parameters:
+      builder: npm
+      ignore:
+        - ".env"
+        - "node_modules/"
+    provides:
+      - name: cert-srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: cap-joule-db # reutiliza o HDI container existente
+      - name: cap-joule-auth # reutiliza a XSUAA existente
+
+  - name: cap-cert-petrobras-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      ignore:
+        - ".env"
+        - "node_modules/"
+    requires:
+      - name: cap-joule-db
+
+  - name: cap-cert-petrobras-app-deployer
+    type: com.sap.application.content
+    path: gen
+    requires:
+      - name: cert-srv-api
+      - name: cap-cert-petrobras-html5-repo-host
+        parameters:
+          content-target: true
+          config:
+            HTML5Runtime_enabled: true
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: capcertpetrobrascertmanagement
+          artifacts:
+            - cert-management.zip
+          target-path: app/
+
+  - name: capcertpetrobrascertmanagement
+    type: html5
+    path: app/cert-management
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+
+  # ─── App Router ───────────────────────────────────────────────────────────
+  - name: cap-cert-petrobras-approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      memory: 128M
+      disk-quota: 256M
+    requires:
+      - name: cap-joule-auth
+      - name: cert-srv-api
+        group: destinations
+        properties:
+          name: cert-srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: cap-cert-petrobras-html5-runtime
+    provides:
+      - name: cert-approuter-api
+        properties:
+          url: ${default-url}
+
+resources:
+
+  # Reutiliza serviços existentes — não cria novos
+  - name: cap-joule-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
+
+  - name: cap-joule-auth
+    type: org.cloudfoundry.existing-service
+
+  - name: cap-cert-petrobras-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: cap-cert-petrobras-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
