@@ -5,6 +5,19 @@
 
 ---
 
+## 🔗 Acesso Rápido — Ambiente de Demonstração
+
+| | URL |
+|---|---|
+| **Interface Fiori (App)** | https://{{APPROUTER_HOST}}/certmanagement/index.html |
+| **OData API** | https://{{SRV_HOST}}/CertService |
+| **Health Check** | https://{{SRV_HOST}}/health |
+| **Metadata OData** | https://{{SRV_HOST}}/CertService/$metadata |
+
+> ⚠️ Autenticação via SAP BTP XSUAA — necessário login com conta BTP do subaccount `build-platform-rfm61ms1` (US10).
+
+---
+
 ## Descrição de Negócio
 
 ### O Problema
@@ -115,11 +128,11 @@ Comportamento padrão do SAP Fiori List Report — carregamento automático ativ
 
 | Componente | Tecnologia | URL |
 |---|---|---|
-| Interface Fiori | SAPUI5 1.136 + Fiori Elements | `cap-cert-petrobras-approuter.cfapps.us10...` |
-| App Router | `@sap/approuter` v16 | — |
-| OData API | SAP CAP Node.js (CDS 8.9) | `cap-cert-petrobras-srv.cfapps.us10...` |
-| Banco de dados | SAP HANA Cloud (HDI container) | `cap-joule-db` |
-| Autenticação | XSUAA (OAuth 2.0) | `cap-joule-auth` |
+| Interface Fiori | SAPUI5 1.136 + Fiori Elements | https://{{APPROUTER_HOST}}/certmanagement/index.html |
+| App Router | `@sap/approuter` v16 | https://{{APPROUTER_HOST}} |
+| OData API | SAP CAP Node.js (CDS 8.9) | https://{{SRV_HOST}}/CertService |
+| Banco de dados | SAP HANA Cloud (HDI container) | `cap-joule-db` (BTP space DEV) |
+| Autenticação | XSUAA (OAuth 2.0) | `cap-joule-auth` (BTP space DEV) |
 
 ---
 
