@@ -1,15 +1,75 @@
 ### Variáveis
-@base = https://{{SRV_HOST}}/CertService
-@tokenUrl = https://{{XSUAA_DOMAIN}}/oauth/token
+@base = {{ODATA_URL}}
+@tokenUrl = {{XSUAA_URL}}/oauth/token
 @clientId = {{XSUAA_CLIENT_ID}}
 
 ### 1. Obter token (execute primeiro)
+# Preencha XSUAA_CLIENT_ID e XSUAA_CLIENT_SECRET no arquivo .env
+# e use o header Basic com base64(clientId:clientSecret)
+# Nunca commite credenciais reais aqui.
 # @name auth
 POST {{tokenUrl}}/token
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic {{XSUAA_BASIC_AUTH_REMOVED}}=
+Authorization: Basic {{XSUAA_BASIC_AUTH}}
 
 grant_type=client_credentials
+
+###
+
+@token = {{auth.response.body.access_token}}
+
+### 2. Catálogo de entidades
+GET {{base}}
+Authorization: Bearer {{token}}
+
+### 3. Tipos de certificação
+GET {{base}}/TipoCertificacoes
+Authorization: Bearer {{token}}
+
+### 4. Todas as habilitações (com status calculado)
+GET {{base}}/HabilitacoesFuncionario?$orderby=dataVencimento asc
+Authorization: Bearer {{token}}
+
+### 5. Apenas certificações VENCIDAS
+GET {{base}}/FuncionariosCertificacoes?$filter=statusCalculado eq 'VENCIDA'&$orderby=diasParaVencer asc
+Authorization: Bearer {{token}}
+
+### 6. Certificações de um funcionário específico (Amanda Winters)
+GET {{base}}/HabilitacoesFuncionario?$filter=userId eq '100052'
+Authorization: Bearer {{token}}
+
+### 7. Certificações a vencer em 30 dias
+GET {{base}}/FuncionariosCertificacoes?$filter=diasParaVencer le 30 and diasParaVencer ge 0
+Authorization: Bearer {{token}}
+
+### 8. Dashboard de compliance (todos os departamentos)
+GET {{base}}/dashboardArea(departamento='')
+Authorization: Bearer {{token}}
+
+### 9. Dashboard por departamento
+GET {{base}}/dashboardArea(departamento='50012007')
+Authorization: Bearer {{token}}
+
+### 10. Metadata (estrutura do serviço)
+GET {{base}}/$metadata
+Authorization: Bearer {{token}}
+
+### 11. Adicionar nova habilitação (POST)
+POST {{base}}/HabilitacoesFuncionario
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "userId": "100093",
+  "nomeCompleto": "Rick Smolla",
+  "departamento": "50012007",
+  "certificacao_codigo": "NR-33",
+  "dataEmissao": "2026-06-25",
+  "dataVencimento": "2027-06-25",
+  "numeroDoc": "CERT-RS-NR33-2026",
+  "orgaoEmissor": "Acert Treinamentos"
+}
+
 
 ###
 
